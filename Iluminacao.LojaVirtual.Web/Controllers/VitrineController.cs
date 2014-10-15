@@ -7,15 +7,19 @@ using System.Web.Mvc;
 
 namespace Iluminacao.LojaVirtual.Web.Controllers
 {
-    public class ProdutosController : Controller
+    public class VitrineController : Controller
     {
+
         private ProdutosRepositorio _repositorio;
-        
-        // GET: Produtos
-        public ActionResult Index()
+        public int ProdutosPorPagina = 3;
+        public ActionResult ListaProdutos(int pagina = 1)
         {
+
             _repositorio = new ProdutosRepositorio();
-            var produtos = _repositorio.Produtos.Take(1);
+            var produtos = _repositorio.Produtos
+                .OrderBy(p => p.Descricao)
+            .Skip((pagina - 1) * ProdutosPorPagina)
+            .Take(ProdutosPorPagina);
             
             return View(produtos);
         }
