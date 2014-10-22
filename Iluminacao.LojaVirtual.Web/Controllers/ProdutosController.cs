@@ -15,7 +15,7 @@ namespace Iluminacao.LojaVirtual.Web.Controllers
         public ActionResult Index()
         {
             _repositorio = new ProdutosRepositorio();
-            var produtos = _repositorio.Produtos.Take(1);
+            var produtos = _repositorio.Produtos.Take(7);
             
             return View(produtos);
         }
