@@ -16,7 +16,7 @@ namespace Iluminacao.LojaVirtual.Web
             routes.MapRoute(
 
 
-                //rota feita
+                //rota nova
                 name: null,
                 url:"Pagina{pagina}",
                 defaults: new{controller = "Vitrine", action = "ListaProdutos"}
