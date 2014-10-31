@@ -10,7 +10,7 @@ namespace Iluminacao.LojaVirtual.Web.Controllers
     {
 
         private ProdutosRepositorio _repositorio;
-        public int ProdutosPorPagina = 3;
+        public int ProdutosPorPagina = 5;
 
 
         public ViewResult ListaProdutos(string categoria, int pagina = 1)

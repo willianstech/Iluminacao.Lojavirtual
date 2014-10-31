@@ -1,9 +1,10 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Web.WebPages.Html;
-using Iluminacao.LojaVirtual.Web.Models;
+using System.Linq;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Iluminacao.LojaVirtual.Web.Models;
 using Iluminacao.LojaVirtual.Web.HtmlHelpers;
+
 
 
 namespace Iluminacao.LojaVirtual.UnitText

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Iluminacao.Lojavirtual.Dominio.Entidade
 {
@@ -10,7 +7,8 @@ namespace Iluminacao.Lojavirtual.Dominio.Entidade
     {
        
         private readonly List<ItemCarrinho> _itemCarrinho = new List<ItemCarrinho>();
-             //adicionar
+             
+        //adicionar
 
         public void AdicionarItem(Produto produto, int quantidade)
         {
@@ -38,7 +36,6 @@ namespace Iluminacao.Lojavirtual.Dominio.Entidade
         public void RemoverItem(Produto produto)
         {
             _itemCarrinho.RemoveAll(l => l.Produto.ProdutoId == produto.ProdutoId);
-
         }
 
         //obter o valor total
