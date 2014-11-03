@@ -1,15 +1,11 @@
 ﻿@model Iluminacao.LojaVirtual.Web.Models.CarrinhoViewModel
 
 
-@
-{
-ViewBag.Title = "Iluminação: Seu carrinho";
-}
 
 
 <style>
     #carrinhoTable td {
-        vertical-align:middle;
+        vertical-align: middle;
     }
 </style>
 
@@ -31,15 +27,14 @@ ViewBag.Title = "Iluminação: Seu carrinho";
                 <td class="text-center">@item.Quantidade</td>
                 <td class="text-center">@item.Produto.Nome</td>
                 <td class="text-right">@item.Produto.Preco.ToString("c")</td>
-                <td class="text-right">@((item.Quantidade * item.Produto.Preco).ToString("c"))</td> 
+                <td class="text-right">@((item.Quantidade * item.Produto.Preco).ToString("c"))</td>
 
                 <td>
                     @using (Html.BeginForm("Remover", "Carrinho"))
                     {
                         @Html.Hidden("ProdutoId", item.Produto.ProdutoId)
-                        @Html.HiddenFor(x => x.ReturnUrl)
-                        <input class="btn btn-sm btn-warning" type="submit"value="Remover" />
-                        
+                        @Html.HiddenFor(x => x.returnUrl)
+                        <input class="btn btn-sm btn-warning" type="submit" value="Remover" />
                     }
                 </td>
             </tr>
@@ -48,11 +43,12 @@ ViewBag.Title = "Iluminação: Seu carrinho";
     <tfoot>
         <tr>
             <td colspan="3" class="text-right">Total:</td>
-            <td class="text-right"></td>
-            @Model.Carrinho.ObterValorTotal().ToString("c")
+            <td class="text-right">
+                @Model.Carrinho.ObterValorTotal().ToString("c")
+            </td>
         </tr>
     </tfoot>
-    </table>
+</table>
 
 <div class="text-center">
     <a class="btn btn-primary" href="@Model.returnUrl">

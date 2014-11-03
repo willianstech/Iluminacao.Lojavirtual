@@ -66,6 +66,12 @@ namespace Iluminacao.LojaVirtual.Web.Controllers
                 });
         }
 
+        public PartialViewResult Resumo()
+        {
+            Carrinho carrinho = ObterCarrinho();
+            return PartialView(carrinho);
+        }
+
 
     }
 }
