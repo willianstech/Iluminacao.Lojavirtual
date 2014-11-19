@@ -30,6 +30,9 @@ namespace Iluminacao.Lojavirtual.Dominio.Entidade
         [Display(Name = "Bairro:")]
         public string  Bairro { get; set; }
 
+        [Display(Name = "Estado:")]
+        public string Estado { get; set; }
+
         [Display(Name = "Email:")]
         [Required(ErrorMessage = "Informe seu email")]
         [EmailAddress(ErrorMessage= "E-mail inválido")]

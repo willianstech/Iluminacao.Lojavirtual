@@ -11,6 +11,8 @@ namespace Iluminacao.LojaVirtual.Web.HtmlHelpers
     {
         //TOTAL DE PAGINAS = 3;
 
+
+        //MvcHtmlString ele é responsável por "paginar" e organizar as paginas.
         public static MvcHtmlString PageLinks(this HtmlHelper html, Paginacao paginacao, Func<int, string> paginaUrl)
         {
             StringBuilder resultado = new StringBuilder();

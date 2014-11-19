@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Iluminacao.Lojavirtual.Dominio.Entidade;
 using System.Linq;
 using Iluminacao.LojaVirtual.Web.Models;
+using System.Configuration;
 
 
 
@@ -71,6 +72,50 @@ namespace Iluminacao.LojaVirtual.Web.Controllers
             Carrinho carrinho = ObterCarrinho();
             return PartialView(carrinho);
         }
+
+        public ViewResult FecharPedido()
+        {
+            return View(new Pedido());
+        }
+
+
+
+        //ESSE MÉTODO "POSTA" O PEDIDO VIA EMAIL(ARQUIVADO NUMA PASTA LOCAL)
+        [HttpPost]
+        public ViewResult FecharPedido(Pedido pedido)
+        {
+            Carrinho carrinho = ObterCarrinho();
+
+            EmailConfiguracoes email = new EmailConfiguracoes
+            {
+                EscreverArquivo = bool.Parse(ConfigurationManager.AppSettings["Email.EscreverArquivo"] ?? "false")
+            };
+
+            EmailPedido emailPedido = new EmailPedido(email);
+
+            if (!carrinho.ItensCarrinho.Any())
+            {
+                ModelState.AddModelError("", "Não foi possível concluir o pedido, seu carrinho está vazio");
+            }
+
+            if (ModelState.IsValid)
+            {
+                emailPedido.ProcessarPedido(carrinho, pedido);
+                carrinho.LimparCarrinho();
+                return View("PedidoConcluido");
+            }
+            else
+            {
+                return View(pedido);
+            }
+
+        }
+
+        public ViewResult PedidoConcluido()
+        {
+            return View();
+        }
+
 
 
     }

@@ -42,8 +42,8 @@ namespace Iluminacao.LojaVirtual.UnitText
         {
             //Arrange
 
-            System.Web.Mvc.HtmlHelper html = null;
-            Paginacao paginacao = new Paginacao()
+            HtmlHelper html = null;
+            Paginacao paginacao = new Paginacao
             {
                 PaginaAtual = 2,
                 ItensPorPagina = 10,
