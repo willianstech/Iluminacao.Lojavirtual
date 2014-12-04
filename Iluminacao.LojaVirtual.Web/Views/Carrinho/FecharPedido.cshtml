@@ -8,16 +8,20 @@
 
 <h2>Fechar o Pedido</h2>
 
-<p>Digite suas informações abaixo</p>
+<p>Digite suas informações abaixo:</p>
 
 @using (Html.BeginForm())
 {
+    //gera a mensagem informado que o usuario não preencheu o campo no formulário
     @Html.ValidationSummary()
     
     <h3>Enviar para</h3>
     <div class="form-group">
         <label>Nome do Cliente:</label>
         @Html.TextBoxFor(x => x.NomeCliente, new {@class = "form-control" })
+        @Html.ValidationMessageFor(x => x.NomeCliente)
+       
+        
     </div>
     
     
@@ -60,6 +64,7 @@
 
         //val('') limpa o campo
         $("#Endereco").val('');
+        $("#Numero").val('');
         $("#Bairro").val('');
         $("#Cidade").val('');
         $("#Estado").val('');
@@ -71,7 +76,7 @@
            
             if(data.resultado_txt == 'sucesso - cep completo')
             {
-                $("#Endereco").val(data.tipo_logradouro + ' ' + data.logradouro);            
+                $("#Endereco").val(data.tipo_logradouro + ' ' + data.logradouro);                
                 $("#Bairro").val(data.bairro);
                 $("#Cidade").val(data.cidade);
                 $("#Estado").val(data.uf);

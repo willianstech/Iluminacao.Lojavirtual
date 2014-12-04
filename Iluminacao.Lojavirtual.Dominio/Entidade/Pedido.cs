@@ -17,7 +17,7 @@ namespace Iluminacao.Lojavirtual.Dominio.Entidade
 
         [Required(ErrorMessage = "Informe seu endereço")]
         [Display(Name = "Endereço:")]
-        public string Endereco { get; set; }
+        public string Endereco { get; set; }       
 
         [Display(Name = "Complemento:")]
         public string Complemento { get; set; }
