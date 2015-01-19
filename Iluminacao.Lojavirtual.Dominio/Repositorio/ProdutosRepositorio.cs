@@ -16,6 +16,30 @@ namespace Iluminacao.Lojavirtual.Dominio.Repositorio
         {
             get { return _context.Produtos; }
         }
+
+        //Salvar produto - Alterar produto
+
+        public void Salvar(Produto produto)
+        {
+            if (produto.ProdutoId == 0)
+            {
+                //Salvando
+                _context.Produtos.Add(produto);
+            }
+            else
+            {
+                //Alteração
+                Produto prod = _context.Produtos.Find(produto.ProdutoId);
+                if(prod != null)
+                {
+                    prod.Nome = produto.Nome;
+                    prod.Descricao = produto.Descricao;
+                    prod.Preco = produto.Preco;
+                    prod.Categoria = produto.Categoria;
+                }
+            }
+            _context.SaveChanges();
+        }
         
     }
 }
