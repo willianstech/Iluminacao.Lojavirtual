@@ -21,6 +21,7 @@ namespace Iluminacao.LojaVirtual.Web.Controllers
             return View(new Administrador());
         }
 
+        [HttpPost]
         public ActionResult Login(Administrador administrador, string returnUrl)
         {
             _repositorio = new AdministradoresRepositorio();
@@ -38,9 +39,10 @@ namespace Iluminacao.LojaVirtual.Web.Controllers
                     else
                     {
                         FormsAuthentication.SetAuthCookie(admin.Login, false);
+                    
 
                         if (Url.IsLocalUrl(returnUrl)
-                           && returnUrl > 1
+                           && returnUrl.Length > 1
                            && returnUrl.StartsWith("/")
                            && !returnUrl.StartsWith("//")
                            && !returnUrl.StartsWith("/\\"))
@@ -53,6 +55,8 @@ namespace Iluminacao.LojaVirtual.Web.Controllers
                     ModelState.AddModelError("", "Administrador não localizado");
                 }
             }
+
+            return View(new Administrador());
         }
     }
 }
