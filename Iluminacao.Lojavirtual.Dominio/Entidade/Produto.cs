@@ -27,5 +27,10 @@ namespace Iluminacao.Lojavirtual.Dominio.Entidade
 
         [Required(ErrorMessage = "Digite a categoria")]
         public string Categoria { get; set; }
+
+        public byte[] Imagem { get; set; }
+
+        public string ImagemMimeType { get; set; }
+
     }
 }
