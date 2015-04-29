@@ -80,6 +80,7 @@ namespace Iluminacao.LojaVirtual.Web.Areas.Administrativo.Controllers
         [HttpPost]
         public JsonResult Excluir(int produtoId)
         {
+            // System.Threding.Thread.Sleep(TimeSpan.FromSeconds(5));
 
             string mensagem = string.Empty;
             _repositorio = new ProdutosRepositorio();
@@ -106,5 +107,7 @@ namespace Iluminacao.LojaVirtual.Web.Areas.Administrativo.Controllers
             }
             return null;
         }
+
+       
     }
 }

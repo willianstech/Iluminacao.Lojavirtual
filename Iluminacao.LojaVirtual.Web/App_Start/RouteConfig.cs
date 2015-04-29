@@ -53,7 +53,12 @@ namespace Iluminacao.LojaVirtual.Web
                },
                    new { pagina = @"\d+" });
 
+            routes.MapRoute("ObterImagem", "Vitrine/ObterImagem/{produtoId}", new {controller = "Vitrine", action="ObterImagem", produtoId = UrlParameter.Optional});
+            
+
             routes.MapRoute(null, "{controller}/{action}");
+
+
             
         }
     }
