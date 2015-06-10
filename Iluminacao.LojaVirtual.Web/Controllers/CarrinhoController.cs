@@ -14,9 +14,18 @@ namespace Iluminacao.LojaVirtual.Web.Controllers
 
         private ProdutosRepositorio _repositorio;
 
+        public ViewResult Index(Carrinho carrinho, string returnurl)
+        {
+            return View(new CarrinhoViewModel
+            {
+                Carrinho = carrinho,
+                returnUrl = returnurl
+            });
+        }
 
 
-        public RedirectToRouteResult Adicionar(int produtoId, string returnUrl)
+
+        public RedirectToRouteResult Adicionar(Carrinho carrinho, int produtoId, string returnUrl)
         {
             _repositorio = new ProdutosRepositorio();
 
@@ -25,26 +34,14 @@ namespace Iluminacao.LojaVirtual.Web.Controllers
 
             if(produto != null)
             {
-                ObterCarrinho().AdicionarItem(produto, 1);
+                carrinho.AdicionarItem(produto, 1);
             }
 
             return RedirectToAction("Index", new { returnUrl });
                 
-        }
+        }        
 
-        private Carrinho ObterCarrinho()
-        {
-            Carrinho carrinho = (Carrinho)Session["Carrinho"];
-
-                if(carrinho == null)
-                {
-                    carrinho = new Carrinho();
-                    Session["Carrinho"] = carrinho;
-                }
-                return carrinho;
-        }
-
-        public RedirectToRouteResult Remover(int produtoId, string returnUrl)
+        public RedirectToRouteResult Remover(Carrinho carrinho, int produtoId, string returnUrl)
         {
             _repositorio = new ProdutosRepositorio();
             Produto produto = _repositorio.Produtos.
@@ -52,24 +49,16 @@ namespace Iluminacao.LojaVirtual.Web.Controllers
 
             if(produto != null)
             {
-                ObterCarrinho().RemoverItem(produto);
+                carrinho.RemoverItem(produto);
             }
 
             return RedirectToAction("Index", new { returnUrl });
         }
 
-        public ViewResult Index(string returnurl)
-        {
-            return View(new CarrinhoViewModel
-                {
-                    Carrinho = ObterCarrinho(),
-                    returnUrl = returnurl
-                });
-        }
+       
 
-        public PartialViewResult Resumo()
-        {
-            Carrinho carrinho = ObterCarrinho();
+        public PartialViewResult Resumo(Carrinho carrinho)
+        {            
             return PartialView(carrinho);
         }
 
@@ -82,10 +71,8 @@ namespace Iluminacao.LojaVirtual.Web.Controllers
 
         //ESSE MÉTODO "POSTA" O PEDIDO VIA EMAIL(ARQUIVADO NUMA PASTA LOCAL)
         [HttpPost]
-        public ViewResult FecharPedido(Pedido pedido)
+        public ViewResult FecharPedido(Carrinho carrinho, Pedido pedido)
         {
-            Carrinho carrinho = ObterCarrinho();
-
             EmailConfiguracoes email = new EmailConfiguracoes
             {
                 EscreverArquivo = bool.Parse(ConfigurationManager.AppSettings["Email.EscreverArquivo"] ?? "false")
